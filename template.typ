@@ -9,12 +9,12 @@
 
 #let info(name, phone, email, age, grade, github, zhihu, bilibili, photo) = {
   box(
-    width: auto,
+    width: 100%,
     height: auto,
     [
         #set align(left)
         #set box(baseline: 5pt)
-        #place(top + right, [
+        #place(right, [
             #image(photo, width: 16%)
         ])
 
