@@ -141,13 +141,13 @@
   degree: none,
   start: none,
   end: none,
-  courses: none,
+  courses: (),
 ) = {
   [
     #place(right, [#start, #end])
     *#university* · #school · #degree
     #if courses != none {
-      [\ 主修课程: #courses ]
+      [\ 主修课程: #courses.join("，") ]
     }
   ]
   v(0.3em)
