@@ -16,6 +16,8 @@
 #let homepage-icon = box(fa-icon("home", fill: color-darknight))
 #let website-icon = box(fa-icon("globe", fill: color-darknight))
 #let graduation-cap = box(fa-icon("graduation-cap"))
+#let bilibili-icon = box(fa-icon("bilibili", fill:color-darknight))
+#let zhihu-icon = box(fa-icon("zhihu", fill:color-darknight))
 
 
 #let project(title: "", body) = {
@@ -51,6 +53,8 @@
 #let birth_item(birth) = if birth != none { box[#birth-icon #box[#birth]] } else { none }
 
 #let website_item(website) = if website != none { box[#website-icon #box[#link(website)]] } else { none }
+#let bilibili_item(bilibili) = if bilibili != none { box[#bilibili-icon #box[#bilibili]] } else { none } 
+#let zhihu_item(zhihu) = if zhihu!= none { box[#zhihu-icon #box[#zhihu]] } else { none } 
 
 #let info(
   name: none,
@@ -61,11 +65,13 @@
   photo: none,
   birth: none,
   website: none,
+  bilibili: none,
+  zhihu: none,
 ) = {
   context {
     let separator = box(width: 5pt)
-    let col1 = (phone_item(phone), graduation_item(grade), birth_item(birth))
-    let col2 = (email_item(email), github_item(github), website_item(website))
+    let col1 = (phone_item(phone), graduation_item(grade), birth_item(birth), bilibili_item(bilibili))
+    let col2 = (email_item(email), github_item(github), website_item(website), zhihu_item(zhihu))
     let n = calc.max(col1.len(), col2.len())
     let rows = range(0, n)
       .map(i => (

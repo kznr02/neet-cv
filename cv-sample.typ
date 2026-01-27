@@ -13,8 +13,10 @@
   grade: "本科",
   github: "https://github.com/kznr02",
   photo: "kaguya.jpg",
-  birth: none,
-  website: none,
+  birth: "forever",
+  website: "none",
+  bilibili: "none",
+  zhihu: "none",
 )
 
 = 教育经历
@@ -55,7 +57,8 @@
   end: "至今",
   link_: "https://thwiki.cc/%E4%B8%9C%E6%96%87%E8%8A%B1%E5%B8%96",
   content: [
-    - 阿巴阿巴],
+    - 阿巴阿巴
+  ],
 )
 #project_entry(
   title: "东方心绮楼",
@@ -96,7 +99,6 @@
 = 个人技能
 
 拥有操纵永远和须臾的能力。
-
 永远就是没有历史，未来永劫不会降临的世界。在那世界就算有活动，也和停止时间一样。
 
 永远亭突然出现在人类的历史上，在人类历史上刻下痕迹，有可能是她解开了永远的魔法。否则施下了永远魔法的永远亭，就会一直隐藏在迷途竹林之中，永不出现在人类的历史之上吧（×2永远亭这名字也成为了物语。）。
