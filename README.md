@@ -5,3 +5,5 @@
 使用方法：使用typst官方的app或者vscode，导入assets与template.typ即可开始使用，详情模板使用请参考cv-sample.typ
 
 有任何改进欢迎提issue提pr(〃￣︶￣)人(￣︶￣〃)
+
+`2026-01-27 堂堂更新 thanks to @y1lan`
