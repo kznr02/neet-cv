@@ -18,9 +18,9 @@
 #let graduation-cap = box(fa-icon("graduation-cap"))
 
 
-#let project(title:"", body) = {
+#let project(title: "", body) = {
   set page(paper: "a4", margin: (x: 1.2cm, y: 1cm))
-  set text(font: ("Noto Sans CJK SC", "Font Awesome 7 Free Solid"), lang: "zh", size: 12pt)
+  set text(font: ("Noto Sans CJK SC", "Font Awesome 7 Free Solid"), lang: "zh", size: 9pt)
   set par(leading: 1em)
   show link: set text(fill: blue)
 
@@ -30,7 +30,7 @@
       below: 1em,
     )
     #set text(
-      size: 14pt,
+      size: 12pt,
       weight: "regular",
     )
 
@@ -39,99 +39,151 @@
       #box(width: 1fr, line(length: 100%))
     ]
   ]
-  
+
   body
 }
 
 
-#let info(name, phone, email, grade, github, photo) = {
-  box(
-    width: 100%,
-    height: auto,
-    [
-      #set align(center)
-      #let separator = box(width: 5pt)
-      #text(name, weight: "bold", size: 18pt)
+#let phone_item(phone) = if phone != none { box[#phone-icon #box[#text(phone)]] } else { none }
+#let email_item(email) = if email != none { box[#email-icon #box[#link("mailto:", email)]] } else { none }
+#let graduation_item(grade) = if grade != none { box[#graduation-cap #box[#text(grade)]] } else { none }
+#let github_item(github) = if github != none { box[#github-icon #box[#link(github)]] } else { none }
+#let birth_item(birth) = if birth != none { box[#birth-icon #box[#birth]] } else { none }
 
-      #phone-icon
-      #box[#text(phone)]
-      #separator
-      #email-icon
-      #box[#link("mailto:", email)]
-      #separator
+#let website_item(website) = if website != none { box[#website-icon #box[#link(website)]] } else { none }
 
-      #graduation-cap
-      #box[#text(grade)]
-      #separator
-      #github-icon
-      #box[#link(github)]
-      #separator
-    ],
-  )
-}
-
-
-#let ctx(title) = {
-  heading[#title]
-}
-
-#let job(
-  entries: (),
+#let info(
+  name: none,
+  phone: none,
+  email: none,
+  grade: none,
+  github: none,
+  photo: none,
+  birth: none,
+  website: none,
 ) = {
-  ctx([实习经历])
-  for entry in entries {
-    place(
-      right,
-      [
-        #entry.start - #entry.end
-      ],
-    )
-    [
-      *#entry.title* - #entry.org
-
-      #if entry.content != none {
-        entry.content
-      }
+  context {
+    let separator = box(width: 5pt)
+    let col1 = (phone_item(phone), graduation_item(grade), birth_item(birth))
+    let col2 = (email_item(email), github_item(github), website_item(website))
+    let n = calc.max(col1.len(), col2.len())
+    let rows = range(0, n)
+      .map(i => (
+        col1.at(i, default: none),
+        col2.at(i, default: none),
+      ))
+      .filter(row => row.any(x => x != none))
+      .flatten()
+    let info_content = [
+      #set align(center)
+      #text(name, weight: "bold", size: 16pt)\
+      #grid(
+        columns: (auto, auto),
+        row-gutter: 1.5em,
+        column-gutter: 1.5em,
+        align: left,
+        ..rows.map(cell => grid.cell(cell)),
+      )
     ]
-  }
-}
-
-
-#let education(entries: ()) = {
-  ctx([教育经历])
-
-  for entry in entries {
-    [
-      #place(right, [#entry.start - #entry.end])
-      *#entry.university* · #entry.school · #entry.degree
-    ]
-  }
-}
-#let proj(entries: ()) = {
-  ctx([项目经历])
-
-  for entry in entries {
-    [
-      #place(right, [#entry.start - #entry.end])
-      *#entry.title* · #entry.tech\
-    ]
-    if entry.link != none {
-      [*项目地址*：#link(entry.link)\ ]
+    let info_size = measure(info_content)
+    if photo != none {
+      box(
+        width: 100%,
+        height: info_size.height,
+        [
+          #grid(
+            columns: (auto, 1fr),
+            grid.cell(align: left, info_content),
+            grid.cell(align: right, image(photo)),
+          )
+        ],
+      )
+    } else {
+      box(
+        width: 100%,
+        [
+          #info_content
+        ],
+      )
     }
-    if entry.content != none {
-      entry.content
-    }
-    v(0.3em)
   }
 }
 
 
-#let skill(title: "", items: ()) = {
-  ctx([个人技能])
-  title
-  v(0em)
-  items
-  v(0.5em)
+
+
+#let job_entry(
+  job: none,
+  org: none,
+  start: none,
+  end: none,
+  content: none,
+) = {
+  place(right, [#start - #end])
+  [
+    *#job* - #org
+    #if content != none {
+      [\ #content]
+    }
+  ]
 }
+
+
+#let education_entry(
+  university: none,
+  school: none,
+  degree: none,
+  start: none,
+  end: none,
+  courses: none,
+) = {
+  [
+    #place(right, [#start, #end])
+    *university* · #school · #degree
+    #if courses != none {
+      [\ 主修课程: #courses ]
+    }
+  ]
+  v(0.3em)
+}
+
+#let project_entry(
+  title: none,
+  tech: none,
+  start: none,
+  end: none,
+  link_: none,
+  content: none,
+) = {
+  [
+    #place(right, [#start - #end])
+    *#title* · #tech
+  ]
+  if link_ != none {
+    
+    [\ *项目地址*：#link(link_) ]
+  }
+  if content != none {
+    [\ #content]
+  }
+  v(0.3em)
+}
+
+#let glory_entry(glory: none, time: none) = {
+  place(right, [#time])[*glory*]
+}
+
+
+#let language_entry(languages:()) = {
+  [*语言*： #languages.join("， ")]
+}
+
+#let certification_entry(certifications:()) ={
+  [*技能*： #certifications.join("，")] 
+}
+
+
+
+
 
 
