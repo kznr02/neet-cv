@@ -81,7 +81,6 @@
       .filter(row => row.any(x => x != none))
       .flatten()
     let info_content = [
-      #set align(center)
       #text(name, weight: "bold", size: 16pt)\
       #grid(
         columns: (auto, auto),
@@ -108,6 +107,7 @@
       box(
         width: 100%,
         [
+          #set align(center)
           #info_content
         ],
       )
