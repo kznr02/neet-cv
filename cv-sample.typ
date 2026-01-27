@@ -8,7 +8,7 @@
 
 #info(
   name: "蓬莱山辉夜",
-  phone: "18775093007",
+  phone: "11451419180",
   email: "neet-hime@gensoukyo.com",
   grade: "本科",
   github: "https://github.com/kznr02",
