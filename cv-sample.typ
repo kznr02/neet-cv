@@ -44,7 +44,9 @@
   start: "2003年12月",
   end: "至今",
   link_: "https://thwiki.cc/%E4%B8%9C%E6%96%B9%E6%B0%B8%E5%A4%9C%E6%8A%84",
-  content: "永琳救救我！",
+  content: [
+    - 永琳救救我！
+  ],
 )
 #project_entry(
   title: "东方文花帖",
@@ -52,7 +54,8 @@
   start: "2005年11月",
   end: "至今",
   link_: "https://thwiki.cc/%E4%B8%9C%E6%96%87%E8%8A%B1%E5%B8%96",
-  content: "阿巴阿巴",
+  content: [
+    - 阿巴阿巴],
 )
 #project_entry(
   title: "东方心绮楼",
@@ -60,7 +63,10 @@
   start: none,
   end: none,
   link_: "https://thwiki.cc/%E4%B8%9C%E6%96%B9%E5%BF%83%E7%BB%AE%E6%A5%BC",
-  content: [前面忘了，后面忘了],
+  content: [
+    - 前面*忘*了
+    - 后面忘*了*
+  ],
 )
 
 = 社团经历
