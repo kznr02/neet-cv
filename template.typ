@@ -139,7 +139,7 @@
 ) = {
   [
     #place(right, [#start, #end])
-    *university* · #school · #degree
+    *#university* · #school · #degree
     #if courses != none {
       [\ 主修课程: #courses ]
     }
